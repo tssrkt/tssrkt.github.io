@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+      (function(m,e,t,r,i,k,a){
+          m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109718484', 'ym');
+  
+      ym(109718484, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109718484" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dharma Time — календарь духовных и астрономических событий</title>
+  <style>
+    :root {
+      --bg: #0f1020;
+      --card: #181a33;
+      --card2: #202344;
+      --text: #f4f1ff;
+      --muted: #c7c2df;
+      --accent: #d8b4fe;
+      --accent2: #f9d976;
+      --border: rgba(255,255,255,0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, #3b1d68 0, transparent 35%),
+        radial-gradient(circle at top right, #253b77 0, transparent 30%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 28px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
+    }
+
+    nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    nav a {
+      text-decoration: none;
+    }
+
+    .hero {
+      padding: 70px 0 50px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .shot img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+        display: block;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 1.05;
+      margin: 0 0 22px;
+    }
+
+    h2 {
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      margin: 0 0 18px;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+    }
+
+    .lead {
+      font-size: 1.22rem;
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--border);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #171224;
+      border: none;
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,0.07);
+      color: var(--text);
+    }
+
+    .phone {
+      background: linear-gradient(180deg, #24284f, #111225);
+      border: 1px solid var(--border);
+      border-radius: 34px;
+      padding: 18px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    }
+
+    .phone-screen {
+      border-radius: 24px;
+      background: #0b0d18;
+      padding: 18px;
+      min-height: 420px;
+    }
+
+    .msg {
+      background: #1d2140;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 14px;
+      color: var(--muted);
+    }
+
+    .msg strong {
+      color: var(--text);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    section {
+      padding: 58px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(24,26,51,0.82);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 24px;
+    }
+
+    .card .icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .shot {
+      min-height: 320px;
+      border-radius: 24px;
+      border: 1px dashed rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--muted);
+      padding: 20px;
+    }
+
+    .status {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .support {
+      background: linear-gradient(135deg, rgba(216,180,254,0.18), rgba(249,217,118,0.12));
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 34px;
+    }
+
+    code {
+      display: block;
+      overflow-wrap: anywhere;
+      background: rgba(0,0,0,0.28);
+      border: 1px solid var(--border);
+      padding: 14px;
+      border-radius: 14px;
+      color: #fff7c2;
+    }
+
+    footer {
+      padding: 36px 0 54px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 850px) {
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero,
+      .grid,
+      .screenshots,
+      .status {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 36px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="wrap">
+    <div class="logo">🌙 Dharma Time</div>
+    <nav>
+      <a href="#features">Возможности</a>
+      <a href="#screenshots">Скриншоты</a>
+      <a href="#roadmap">Разработка</a>
+      <a href="#support">Поддержать</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div>
+        <div class="badge">Бесплатный Telegram-бот в разработке</div>
+        <h1>Dharma Time</h1>
+        <p class="lead">
+          Календарь духовных и астрономических событий: буддийские праздники,
+          индуистские даты, христианские календари, фазы Луны, затмения,
+          метеорные потоки и другие небесные явления.
+        </p>
+        <div class="buttons">
+          <a class="btn primary" href="#support">Поддержать проект</a>
+          <a class="btn secondary" href="#features">Посмотреть возможности</a>
+        </div>
+      </div>
+
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="msg">
+            <strong>🌕 Астрономия</strong>
+            Лунные дни, фазы Луны, затмения, солнцестояния и равноденствия.
+          </div>
+          <div class="msg">
+            <strong>🪷 Буддийские календари</strong>
+            Напоминания о днях практики и больших праздниках разных традиций.
+          </div>
+          <div class="msg">
+            <strong>🌠 Вайшнавские календари</strong>
+            Индийские праздники, экадаши, санкранти, пурнимы, амавасьи и т.д.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="wrap">
+      <h2>Что умеет Dharma Time</h2>
+      <p class="muted">
+        Проект объединяет календарные системы, которые обычно приходится искать в разных источниках.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="icon">🪷</div>
+          <h3>Буддийские календари</h3>
+          <p class="muted">Тибетская традиция, Китай, Япония, Шри-Ланка, Бирма, Таиланд и другие модули.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🕉</div>
+          <h3>Индуистские календари</h3>
+          <p class="muted">Экадаши, панчанга, вайшнавские праздники, Северная и Южная Индия.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">✝</div>
+          <h3>Христианские праздники</h3>
+          <p class="muted">Православный старый и новый стиль, а также католический календарь.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🌕</div>
+          <h3>Луна</h3>
+          <p class="muted">Фазы Луны, лунные дни, восход и заход Луны, переходы в знаки и многое другое.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🌠</div>
+          <h3>Астрономия</h3>
+          <p class="muted">Затмения, метеорные потоки, кометы, планетные события, перигелий и афелий Земли.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">📍</div>
+          <h3>Локальные расчеты</h3>
+          <p class="muted">Многие события рассчитываются с учётом города и часового пояса пользователя.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="screenshots" class="wrap">
+      <h2>Скриншоты</h2>
+      <p class="muted">Бот еще не вышел в публичный релиз, но уже работоспособен и активно развивается.</p>
+
+      <div class="screenshots">
+          <div class="shot">
+              <img src="img/01.jpg" alt="Главное меню">
+          </div>
+      
+          <div class="shot">
+              <img src="img/02.jpg" alt="Календарь">
+          </div>
+      
+          <div class="shot">
+              <img src="img/03.jpg" alt="Астрономические события">
+          </div>
+      </div>
+      
+      <div class="screenshots">
+          <div class="shot">
+              <img src="img/04.jpg" alt="Вайшнавские события">
+          </div>
+      
+          <div class="shot">
+              <img src="img/05.jpg" alt="Тхеравадинские события">
+          </div>
+      
+          <div class="shot">
+              <img src="img/06.jpg" alt="Махаянские события">
+          </div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="wrap">
+      <h2>Статус разработки</h2>
+
+      <div class="status">
+        <div class="card">
+          <h3>Уже прорабатывается</h3>
+          <ul class="muted">
+            <li>затмения, лунные и солнечные события;</li>
+            <li>панчанга с экадаши и прочими событиями;</li>
+            <li>тхеравадинские календари с упосатхами;</li>
+            <li>махаянские календарные модули;</li>
+            <li>календарь и оповещения.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Планируется</h3>
+          <ul class="muted">
+            <li>новые региональные буддийские календари;</li>
+            <li>православные и католические праздники;</li>
+            <li>вайшнавские события для разных сампрадай;</li>
+            <li>астрономические уведомления для любителей наблюдений;</li>
+            <li>улучшение интерфейса и локализации.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="support" class="wrap">
+      <div class="support">
+        <h2>Поддержать Dharma Time</h2>
+        <p class="muted">
+          Dharma Time создается одним человеком и остается бесплатным для всех пользователей.
+          Поддержка помогает оплачивать инструменты разработки, нейросети, хостинг
+          и дальнейшее развитие календарных модулей.
+        </p>
+
+        <p>
+          Даже 2–5 долларов в месяц помогают проекту существовать и двигаться дальше.
+        </p>
+
+        <h3>USDT (TON)</h3>
+        <code>UQCu1fb6WFRd1KdHt3SCbS0BhOYHrveCYZU97EJWLXDUPPIh</code>
+
+        <div class="buttons" style="margin-top: 20px;">
+          <a class="btn primary" href="https://liberapay.com/tssrkt/donate" target="_blank" rel="noopener noreferrer">Поддержать на LiberaPay</a>
+          <a class="btn secondary" href="https://author.today/post/864100" target="_blank">Читать описание бота</a>
+          <a class="btn secondary" href="https://t.me/ptica_govorun_bot" target="_blank">Написать разработчику</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    Dharma Time · бесплатный календарь духовных и астрономических событий
+  </footer>
+</body>
+</html>
